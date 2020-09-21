@@ -61,8 +61,16 @@ def load_data_fashion_mnist(mnist_train,mnist_test,batch_size):
 def evaluate_accuracy(data_iter, net):
     acc_sum, n = 0.0, 0
     for X, y in data_iter:
-        acc_sum += (net(X).argmax(dim=1) == y).float().sum().item()
-        n += y.shape[0]
+        if isinstance(net,torch.nn.Module): # isinstance()函数判断一个对象是否是一个已知的类型.考虑继承关系.判断两者的类型是否相同
+            net.eval() #评估模式，关闭dropout
+            acc_sum += (net(X).argmax(dim=1) == y).float().sum().item() # item得到张量的元素值
+            net.train()
+    else:
+        if('is_training' in net.__code__.co_varnames):
+            acc_sum += (net(X,is_training = False).argmax(dim=1)==y).float().sum().item()
+        else:
+            acc_sum += (net(X).argmax(dim=1)==y).float().sum().item()
+    n += y.shape[0]
     return acc_sum / n
 
 
