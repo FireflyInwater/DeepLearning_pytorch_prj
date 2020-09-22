@@ -32,6 +32,7 @@ net2 = nn.Sequential(
     nn.ReLU(),
     nn.Linear(256,10)
 )
+print(net2)
 print(net2(X))
 
 
@@ -39,6 +40,18 @@ print(net2(X))
 #接收⼀个⼦模块的列表作为输⼊，然后也可以类似List那样进⾏append和extend操作:
 net3 = nn.ModuleList([nn.Linear(784,256),nn.ReLU()])
 net3.append(nn.Linear(256,10))
+print(net3)
 
-#ModuleDict
+#ModuleDict类
 
+net4 = nn.ModuleDict({
+    'linear':nn.Linear(784,256),
+    'act':nn.ReLU()}
+)
+
+net4['output'] = nn.Linear(256,10)
+print(net4['linear'])
+print(net4)
+
+'''构造模型的4种常用方法。但是，通过继承nn。Module的类构造方式的扩展性是最强的，往往我们
+在实际用时，通过这种方式。'''
