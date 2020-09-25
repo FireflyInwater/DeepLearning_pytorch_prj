@@ -58,6 +58,7 @@ def load_data_fashion_mnist(mnist_train,mnist_test,batch_size):
     test_iter = torch.utils.data.DataLoader(mnist_test, batch_size=batch_size, shuffle=False, num_workers=num_workers)
     return train_iter,test_iter
 
+
 def evaluate_accuracy(data_iter, net):
     acc_sum, n = 0.0, 0
     for X, y in data_iter:
