@@ -1,5 +1,6 @@
 import random
 import torch
+import torch.nn as nn
 from matplotlib import pyplot as plt
 from IPython import display
 import sys
@@ -125,3 +126,11 @@ def corr2d(X,K):
         for j in range(Y.shape[1]):
             Y[i,j] = (X[i:i+h,j:j+w]*K).sum()
     return Y
+
+
+class GlobalAvgPool2d(nn.Module):
+    def __init__(self):
+        super(GlobalAvgPool2d,self).__init__()
+    def forward(self,x):
+        return torch.nn.functional.avg_pool2d(x,kernel_size=x.size()[2:])
+
