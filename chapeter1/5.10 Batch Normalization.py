@@ -10,7 +10,7 @@ import d2lzh_pytorch.d2lzh_pytorch_function as d2l
 
 net = nn.Sequential(
 nn.Conv2d(1, 6, 5), # in_channels, out_channels,kernel_size
-nn.BatchNorm2d(6),
+nn.BatchNorm2d(6), # num_features
 nn.Sigmoid(),
 nn.MaxPool2d(2, 2), # kernel_size, stride
 nn.Conv2d(6, 16, 5),
