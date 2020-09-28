@@ -83,8 +83,7 @@ else:
     device = 'cpu'
 
 print("training on {}".format(device))
-
-#训练
+#z训练
 net = net.to(device)
 batch_count = 0
 for i in range(num_epochs):
